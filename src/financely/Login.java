@@ -26,21 +26,75 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        UsernameLogin = new javax.swing.JTextField();
+        PasswordLogin = new javax.swing.JPasswordField();
+        ButtonLogin = new javax.swing.JButton();
+        QuestionRegister = new javax.swing.JLabel();
+        RegistLink = new javax.swing.JLabel();
+        UILogin = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Financely");
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        UsernameLogin.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        UsernameLogin.setBorder(null);
+        UsernameLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsernameLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(UsernameLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 207, 270, 35));
+
+        PasswordLogin.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        PasswordLogin.setBorder(null);
+        PasswordLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(PasswordLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 302, 270, 35));
+
+        ButtonLogin.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonLogin.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonLogin.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonLogin.setText("Get Started");
+        ButtonLogin.setBorder(null);
+        ButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 380, 290, 47));
+
+        QuestionRegister.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
+        QuestionRegister.setForeground(new java.awt.Color(255, 255, 255));
+        QuestionRegister.setText("Don't have an account ? ");
+        getContentPane().add(QuestionRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, -1, -1));
+
+        RegistLink.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
+        RegistLink.setForeground(new java.awt.Color(19, 196, 250));
+        RegistLink.setText("Register");
+        getContentPane().add(RegistLink, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, -1, -1));
+
+        UILogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Login.png"))); // NOI18N
+        getContentPane().add(UILogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void UsernameLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsernameLoginActionPerformed
+
+    private void PasswordLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordLoginActionPerformed
+
+    private void ButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +132,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonLogin;
+    private javax.swing.JPasswordField PasswordLogin;
+    private javax.swing.JLabel QuestionRegister;
+    private javax.swing.JLabel RegistLink;
+    private javax.swing.JLabel UILogin;
+    private javax.swing.JTextField UsernameLogin;
     // End of variables declaration//GEN-END:variables
 }

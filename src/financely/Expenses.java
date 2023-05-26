@@ -26,21 +26,131 @@ public class Expenses extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        ButtonDeleteExpense = new javax.swing.JButton();
+        AmountIncomes = new javax.swing.JTextField();
+        AmountIncomes1 = new javax.swing.JTextField();
+        ButtonDeleteExpense2 = new javax.swing.JButton();
+        ButtonDeleteExpense1 = new javax.swing.JButton();
+        ButtonAddIncomes = new javax.swing.JButton();
+        TableIncomes = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Financely");
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ButtonDeleteExpense.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonDeleteExpense.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonDeleteExpense.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonDeleteExpense.setText("Delete");
+        ButtonDeleteExpense.setBorder(null);
+        ButtonDeleteExpense.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonDeleteExpenseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonDeleteExpense, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, 120, 47));
+
+        AmountIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        AmountIncomes.setBorder(null);
+        AmountIncomes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AmountIncomesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AmountIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 473, 270, 35));
+
+        AmountIncomes1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        AmountIncomes1.setBorder(null);
+        AmountIncomes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AmountIncomes1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AmountIncomes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 381, 270, 35));
+
+        ButtonDeleteExpense2.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonDeleteExpense2.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonDeleteExpense2.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonDeleteExpense2.setText("Save Edit");
+        ButtonDeleteExpense2.setBorder(null);
+        ButtonDeleteExpense2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonDeleteExpense2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonDeleteExpense2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 460, 120, 47));
+
+        ButtonDeleteExpense1.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonDeleteExpense1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonDeleteExpense1.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonDeleteExpense1.setText("Clear");
+        ButtonDeleteExpense1.setBorder(null);
+        ButtonDeleteExpense1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonDeleteExpense1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonDeleteExpense1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, 120, 47));
+
+        ButtonAddIncomes.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonAddIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonAddIncomes.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonAddIncomes.setText("Add");
+        ButtonAddIncomes.setBorder(null);
+        ButtonAddIncomes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonAddIncomesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonAddIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 380, 47));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TableIncomes.setViewportView(jTable1);
+
+        getContentPane().add(TableIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 340, 200));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Manage Incomes - 2.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ButtonDeleteExpenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteExpenseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonDeleteExpenseActionPerformed
+
+    private void AmountIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmountIncomesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AmountIncomesActionPerformed
+
+    private void AmountIncomes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmountIncomes1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AmountIncomes1ActionPerformed
+
+    private void ButtonDeleteExpense1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteExpense1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonDeleteExpense1ActionPerformed
+
+    private void ButtonDeleteExpense2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteExpense2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonDeleteExpense2ActionPerformed
+
+    private void ButtonAddIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddIncomesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonAddIncomesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +188,14 @@ public class Expenses extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AmountIncomes;
+    private javax.swing.JTextField AmountIncomes1;
+    private javax.swing.JButton ButtonAddIncomes;
+    private javax.swing.JButton ButtonDeleteExpense;
+    private javax.swing.JButton ButtonDeleteExpense1;
+    private javax.swing.JButton ButtonDeleteExpense2;
+    private javax.swing.JScrollPane TableIncomes;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

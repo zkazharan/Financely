@@ -26,21 +26,92 @@ public class Register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel2 = new javax.swing.JLabel();
+        LoginLink = new javax.swing.JLabel();
+        EmailRegister = new javax.swing.JTextField();
+        UsernameRegister = new javax.swing.JTextField();
+        PasswordRegister = new javax.swing.JPasswordField();
+        ButtonRegister = new javax.swing.JButton();
+        QuestionLogin = new javax.swing.JLabel();
+        UIRegister = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel2.setText("jLabel2");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Financely");
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        LoginLink.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
+        LoginLink.setForeground(new java.awt.Color(19, 196, 250));
+        LoginLink.setText("Login");
+        getContentPane().add(LoginLink, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 530, -1, -1));
+
+        EmailRegister.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        EmailRegister.setBorder(null);
+        EmailRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmailRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(EmailRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 205, 270, 35));
+
+        UsernameRegister.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        UsernameRegister.setBorder(null);
+        UsernameRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsernameRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(UsernameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 299, 270, 35));
+
+        PasswordRegister.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        PasswordRegister.setBorder(null);
+        PasswordRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(PasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 394, 270, 35));
+
+        ButtonRegister.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonRegister.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonRegister.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonRegister.setText("Register");
+        ButtonRegister.setBorder(null);
+        ButtonRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 290, 47));
+
+        QuestionLogin.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
+        QuestionLogin.setForeground(new java.awt.Color(255, 255, 255));
+        QuestionLogin.setText("Already have an account ? ");
+        getContentPane().add(QuestionLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 530, -1, -1));
+
+        UIRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Register.png"))); // NOI18N
+        getContentPane().add(UIRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 660));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void EmailRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailRegisterActionPerformed
+
+    private void UsernameRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsernameRegisterActionPerformed
+
+    private void PasswordRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordRegisterActionPerformed
+
+    private void ButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +149,13 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonRegister;
+    private javax.swing.JTextField EmailRegister;
+    private javax.swing.JLabel LoginLink;
+    private javax.swing.JPasswordField PasswordRegister;
+    private javax.swing.JLabel QuestionLogin;
+    private javax.swing.JLabel UIRegister;
+    private javax.swing.JTextField UsernameRegister;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
