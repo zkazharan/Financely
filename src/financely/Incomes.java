@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -59,12 +60,13 @@ public class Incomes extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        CategoriesIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        CategoriesIncomes.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         CategoriesIncomes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Choose--", "Salary", "Profit", "Return" }));
         CategoriesIncomes.setToolTipText("");
         CategoriesIncomes.setBorder(null);
         getContentPane().add(CategoriesIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 290, 40));
 
+        TableIncomes.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         TableIncomes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -89,7 +91,7 @@ public class Incomes extends javax.swing.JFrame {
         ButtonEditIncomes.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonEditIncomes.setForeground(new java.awt.Color(255, 255, 255));
         ButtonEditIncomes.setText("Save Edit");
-        ButtonEditIncomes.setBorder(null);
+        ButtonEditIncomes.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonEditIncomes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonEditIncomesActionPerformed(evt);
@@ -109,7 +111,7 @@ public class Incomes extends javax.swing.JFrame {
         ButtonDeleteIncomes.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonDeleteIncomes.setForeground(new java.awt.Color(255, 255, 255));
         ButtonDeleteIncomes.setText("Delete");
-        ButtonDeleteIncomes.setBorder(null);
+        ButtonDeleteIncomes.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonDeleteIncomes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonDeleteIncomesActionPerformed(evt);
@@ -121,7 +123,7 @@ public class Incomes extends javax.swing.JFrame {
         ButtonClearIncomes.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonClearIncomes.setForeground(new java.awt.Color(255, 255, 255));
         ButtonClearIncomes.setText("Clear");
-        ButtonClearIncomes.setBorder(null);
+        ButtonClearIncomes.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonClearIncomes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonClearIncomesActionPerformed(evt);
@@ -133,7 +135,7 @@ public class Incomes extends javax.swing.JFrame {
         ButtonAddIncomes.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonAddIncomes.setForeground(new java.awt.Color(255, 255, 255));
         ButtonAddIncomes.setText("Add");
-        ButtonAddIncomes.setBorder(null);
+        ButtonAddIncomes.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonAddIncomes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonAddIncomesActionPerformed(evt);

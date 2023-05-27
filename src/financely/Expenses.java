@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -63,7 +64,7 @@ public class Expenses extends javax.swing.JFrame {
         ButtonDeleteExpenses.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonDeleteExpenses.setForeground(new java.awt.Color(255, 255, 255));
         ButtonDeleteExpenses.setText("Delete");
-        ButtonDeleteExpenses.setBorder(null);
+        ButtonDeleteExpenses.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonDeleteExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonDeleteExpensesActionPerformed(evt);
@@ -83,7 +84,7 @@ public class Expenses extends javax.swing.JFrame {
         ButtonEditExpenses.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonEditExpenses.setForeground(new java.awt.Color(255, 255, 255));
         ButtonEditExpenses.setText("Save Edit");
-        ButtonEditExpenses.setBorder(null);
+        ButtonEditExpenses.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonEditExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonEditExpensesActionPerformed(evt);
@@ -95,7 +96,7 @@ public class Expenses extends javax.swing.JFrame {
         ButtonClearExpenses.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonClearExpenses.setForeground(new java.awt.Color(255, 255, 255));
         ButtonClearExpenses.setText("Clear");
-        ButtonClearExpenses.setBorder(null);
+        ButtonClearExpenses.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonClearExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonClearExpensesActionPerformed(evt);
@@ -107,7 +108,7 @@ public class Expenses extends javax.swing.JFrame {
         ButtonAddExpenses.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonAddExpenses.setForeground(new java.awt.Color(255, 255, 255));
         ButtonAddExpenses.setText("Add");
-        ButtonAddExpenses.setBorder(null);
+        ButtonAddExpenses.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonAddExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonAddExpensesActionPerformed(evt);
@@ -138,7 +139,7 @@ public class Expenses extends javax.swing.JFrame {
         DateExpenses.setDateFormatString("yyyy-MM-dd");
         getContentPane().add(DateExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 290, 40));
 
-        CategoriesExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        CategoriesExpenses.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         CategoriesExpenses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Choose --", "Food", "Medical", "Laundry", "Shopping", "Transport", "" }));
         CategoriesExpenses.setToolTipText("");
         CategoriesExpenses.setBorder(null);

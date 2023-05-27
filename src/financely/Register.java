@@ -3,6 +3,7 @@ package financely;
 import com.mysql.jdbc.Connection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
 /**
@@ -70,7 +71,7 @@ public class Register extends javax.swing.JFrame {
         ButtonRegister.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonRegister.setForeground(new java.awt.Color(255, 255, 255));
         ButtonRegister.setText("Register");
-        ButtonRegister.setBorder(null);
+        ButtonRegister.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonRegisterActionPerformed(evt);

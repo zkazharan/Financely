@@ -1,6 +1,7 @@
 package financely;
 
 import com.mysql.jdbc.Connection;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 
 /**
@@ -50,7 +51,7 @@ public class Login extends javax.swing.JFrame {
         ButtonLogin.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonLogin.setForeground(new java.awt.Color(255, 255, 255));
         ButtonLogin.setText("Get Started");
-        ButtonLogin.setBorder(null);
+        ButtonLogin.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonLoginActionPerformed(evt);

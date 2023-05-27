@@ -1,7 +1,10 @@
 package financely;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javaswingdev.chart.ModelPieChart;
+import javaswingdev.chart.PieChart;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -24,8 +27,13 @@ public class Analytics extends javax.swing.JFrame {
         this.userID = userID;
         
         this.show_table_transaction_history_all();
-        this.show_table_income_per_category();
-        this.show_table_expense_per_category();
+        getContentPane().setBackground(new Color(255, 255, 255));
+        pieChart1.setChartType(PieChart.PeiChartType.DEFAULT);
+        pieChart2.setChartType(PieChart.PeiChartType.DEFAULT);
+        show_data_expenses();
+        show_data_incomes();
+//        this.show_table_income_per_category();
+//        this.show_table_expense_per_category();
     }
 
     /**
@@ -40,10 +48,8 @@ public class Analytics extends javax.swing.JFrame {
         TableHistoryScroll = new javax.swing.JScrollPane();
         TableHistory = new javax.swing.JTable();
         SelectGroupHistory = new javax.swing.JComboBox<>();
-        TableIncomesCategoryScroll = new javax.swing.JScrollPane();
-        TableIncomesCategory = new javax.swing.JTable();
-        TableExpensesCategoryScroll = new javax.swing.JScrollPane();
-        TableExpensesCategory = new javax.swing.JTable();
+        pieChart1 = new javaswingdev.chart.PieChart();
+        pieChart2 = new javaswingdev.chart.PieChart();
         BackAnalytics = new javax.swing.JLabel();
         UIAnalytics = new javax.swing.JLabel();
 
@@ -52,6 +58,7 @@ public class Analytics extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        TableHistory.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         TableHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -65,9 +72,9 @@ public class Analytics extends javax.swing.JFrame {
         ));
         TableHistoryScroll.setViewportView(TableHistory);
 
-        getContentPane().add(TableHistoryScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 380, 390));
+        getContentPane().add(TableHistoryScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 380, 350));
 
-        SelectGroupHistory.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        SelectGroupHistory.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         SelectGroupHistory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Day", "Month", "Year" }));
         SelectGroupHistory.setToolTipText("");
         SelectGroupHistory.setBorder(null);
@@ -76,37 +83,9 @@ public class Analytics extends javax.swing.JFrame {
                 SelectGroupHistoryActionPerformed(evt);
             }
         });
-        getContentPane().add(SelectGroupHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 140, 40));
-
-        TableIncomesCategory.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        TableIncomesCategoryScroll.setViewportView(TableIncomesCategory);
-
-        getContentPane().add(TableIncomesCategoryScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 240, 140));
-
-        TableExpensesCategory.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        TableExpensesCategoryScroll.setViewportView(TableExpensesCategory);
-
-        getContentPane().add(TableExpensesCategoryScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 207, 240, 140));
+        getContentPane().add(SelectGroupHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 178, 140, -1));
+        getContentPane().add(pieChart1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 250, 220));
+        getContentPane().add(pieChart2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, 250, 220));
 
         BackAnalytics.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -115,7 +94,7 @@ public class Analytics extends javax.swing.JFrame {
         });
         getContentPane().add(BackAnalytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 80, 40));
 
-        UIAnalytics.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Analytics.png"))); // NOI18N
+        UIAnalytics.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Analytics (1).png"))); // NOI18N
         getContentPane().add(UIAnalytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 660));
 
         pack();
@@ -184,6 +163,49 @@ public class Analytics extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+    
+    private void show_data_expenses(){
+        
+        try {
+            String pieQuery = "SELECT Categories, SUM(Amount) AS TotalAmount FROM dataexpenses WHERE userID = ? GROUP BY Categories";
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            java.sql.PreparedStatement s = Vconn.prepareStatement(pieQuery);
+            s.setInt(1, userID);
+            java.sql.ResultSet r = s.executeQuery();
+            
+            int index = 0;
+            while (r.next()){
+                String categories = r.getString("Categories");
+                double values = r.getDouble("TotalAmount");
+                pieChart1.addData(new ModelPieChart(categories, values, getColor(index++)));
+            }
+        } catch (SQLException e) {
+        }
+    }
+    
+    private void show_data_incomes(){
+        
+        try {
+            String pieIncomes = "SELECT Categories, SUM(Amount) AS TotalAmount FROM dataincomes WHERE userID = ? GROUP BY Categories";
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            java.sql.PreparedStatement s = Vconn.prepareStatement(pieIncomes);
+            s.setInt(1, userID);
+            java.sql.ResultSet r = s.executeQuery();
+            
+            int index = 0;
+            while (r.next()){
+                String categories = r.getString("Categories");
+                double values = r.getDouble("TotalAmount");
+                pieChart2.addData(new ModelPieChart(categories, values, getColor(index++)));
+            }
+        } catch (SQLException e) {
+        }
+    }
+    
+    private Color getColor(int index){
+        Color[] color = new Color[]{new Color(255, 102, 102), new Color(58, 55, 227), new Color(206, 215, 33),  new Color(230, 115, 63), new Color(210, 180, 63)};
+        return color[index];
     }
     
     private void show_table_transaction_history_day() {
@@ -329,9 +351,9 @@ public class Analytics extends javax.swing.JFrame {
                 });
             }
             
-            TableIncomesCategory.setModel(table); 
-            TableIncomesCategory.getTableHeader().setResizingAllowed(false);
-            TableIncomesCategory.getTableHeader().setReorderingAllowed(false);
+//            TableIncomesCategory.setModel(table); 
+//            TableIncomesCategory.getTableHeader().setResizingAllowed(false);
+//            TableIncomesCategory.getTableHeader().setReorderingAllowed(false);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -366,9 +388,9 @@ public class Analytics extends javax.swing.JFrame {
                 });
             }
             
-            TableExpensesCategory.setModel(table); 
-            TableExpensesCategory.getTableHeader().setResizingAllowed(false);
-            TableExpensesCategory.getTableHeader().setReorderingAllowed(false);
+//            TableExpensesCategory.setModel(table); 
+//            TableExpensesCategory.getTableHeader().setResizingAllowed(false);
+//            TableExpensesCategory.getTableHeader().setReorderingAllowed(false);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -377,12 +399,10 @@ public class Analytics extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackAnalytics;
     private javax.swing.JComboBox<String> SelectGroupHistory;
-    private javax.swing.JTable TableExpensesCategory;
-    private javax.swing.JScrollPane TableExpensesCategoryScroll;
     private javax.swing.JTable TableHistory;
     private javax.swing.JScrollPane TableHistoryScroll;
-    private javax.swing.JTable TableIncomesCategory;
-    private javax.swing.JScrollPane TableIncomesCategoryScroll;
     private javax.swing.JLabel UIAnalytics;
+    private javaswingdev.chart.PieChart pieChart1;
+    private javaswingdev.chart.PieChart pieChart2;
     // End of variables declaration//GEN-END:variables
 }

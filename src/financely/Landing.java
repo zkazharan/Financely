@@ -1,5 +1,7 @@
 package financely;
 
+import javax.swing.BorderFactory;
+
 /**
  *
  * @author Kelompok 3 RPL 4A
@@ -35,25 +37,25 @@ public class Landing extends javax.swing.JFrame {
         ButtonLoginLanding.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonLoginLanding.setForeground(new java.awt.Color(255, 255, 255));
         ButtonLoginLanding.setText("Login");
-        ButtonLoginLanding.setBorder(null);
+        ButtonLoginLanding.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonLoginLanding.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonLoginLandingActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonLoginLanding, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 290, 47));
+        getContentPane().add(ButtonLoginLanding, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 290, 47));
 
         ButtonRegisterLanding.setBackground(new java.awt.Color(19, 196, 250));
         ButtonRegisterLanding.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonRegisterLanding.setForeground(new java.awt.Color(255, 255, 255));
         ButtonRegisterLanding.setText("Register Now");
-        ButtonRegisterLanding.setBorder(null);
+        ButtonRegisterLanding.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         ButtonRegisterLanding.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonRegisterLandingActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonRegisterLanding, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 520, 290, 47));
+        getContentPane().add(ButtonRegisterLanding, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 290, 47));
 
         UILanding.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Landing.png"))); // NOI18N
         getContentPane().add(UILanding, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 660));
