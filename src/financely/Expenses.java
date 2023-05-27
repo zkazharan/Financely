@@ -51,6 +51,7 @@ public class Expenses extends javax.swing.JFrame {
         DateExpenses = new com.toedter.calendar.JDateChooser();
         CategoriesExpenses = new javax.swing.JComboBox<>();
         BackExpenses = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         UIManageExpenses = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,7 +60,7 @@ public class Expenses extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ButtonDeleteExpenses.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonDeleteExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonDeleteExpenses.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonDeleteExpenses.setForeground(new java.awt.Color(255, 255, 255));
         ButtonDeleteExpenses.setText("Delete");
         ButtonDeleteExpenses.setBorder(null);
@@ -79,7 +80,7 @@ public class Expenses extends javax.swing.JFrame {
         getContentPane().add(AmountExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 270, 35));
 
         ButtonEditExpenses.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonEditExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonEditExpenses.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonEditExpenses.setForeground(new java.awt.Color(255, 255, 255));
         ButtonEditExpenses.setText("Save Edit");
         ButtonEditExpenses.setBorder(null);
@@ -91,7 +92,7 @@ public class Expenses extends javax.swing.JFrame {
         getContentPane().add(ButtonEditExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 500, 120, 47));
 
         ButtonClearExpenses.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonClearExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonClearExpenses.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonClearExpenses.setForeground(new java.awt.Color(255, 255, 255));
         ButtonClearExpenses.setText("Clear");
         ButtonClearExpenses.setBorder(null);
@@ -103,7 +104,7 @@ public class Expenses extends javax.swing.JFrame {
         getContentPane().add(ButtonClearExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 120, 47));
 
         ButtonAddExpenses.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonAddExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonAddExpenses.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonAddExpenses.setForeground(new java.awt.Color(255, 255, 255));
         ButtonAddExpenses.setText("Add");
         ButtonAddExpenses.setBorder(null);
@@ -149,6 +150,12 @@ public class Expenses extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BackExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 80, 40));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Click a row in table to edit it");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 30));
 
         UIManageExpenses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Manage Expenses - 2.png"))); // NOI18N
         getContentPane().add(UIManageExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
@@ -368,5 +375,6 @@ public class Expenses extends javax.swing.JFrame {
     private javax.swing.JTable TableExpenses;
     private javax.swing.JScrollPane TableExpensesScroll;
     private javax.swing.JLabel UIManageExpenses;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

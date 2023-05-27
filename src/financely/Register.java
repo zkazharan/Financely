@@ -67,7 +67,7 @@ public class Register extends javax.swing.JFrame {
         getContentPane().add(PasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 394, 270, 35));
 
         ButtonRegister.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonRegister.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonRegister.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonRegister.setForeground(new java.awt.Color(255, 255, 255));
         ButtonRegister.setText("Register");
         ButtonRegister.setBorder(null);

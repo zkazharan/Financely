@@ -51,6 +51,7 @@ public class Incomes extends javax.swing.JFrame {
         ButtonAddIncomes = new javax.swing.JButton();
         DateIncomes = new com.toedter.calendar.JDateChooser();
         BackIncomes = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         UIManageIncomes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,7 +86,7 @@ public class Incomes extends javax.swing.JFrame {
         getContentPane().add(TableIncomesScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 340, 250));
 
         ButtonEditIncomes.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonEditIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonEditIncomes.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonEditIncomes.setForeground(new java.awt.Color(255, 255, 255));
         ButtonEditIncomes.setText("Save Edit");
         ButtonEditIncomes.setBorder(null);
@@ -105,7 +106,7 @@ public class Incomes extends javax.swing.JFrame {
         getContentPane().add(AmountIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 270, 35));
 
         ButtonDeleteIncomes.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonDeleteIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonDeleteIncomes.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonDeleteIncomes.setForeground(new java.awt.Color(255, 255, 255));
         ButtonDeleteIncomes.setText("Delete");
         ButtonDeleteIncomes.setBorder(null);
@@ -117,7 +118,7 @@ public class Incomes extends javax.swing.JFrame {
         getContentPane().add(ButtonDeleteIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, 120, 47));
 
         ButtonClearIncomes.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonClearIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonClearIncomes.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonClearIncomes.setForeground(new java.awt.Color(255, 255, 255));
         ButtonClearIncomes.setText("Clear");
         ButtonClearIncomes.setBorder(null);
@@ -129,7 +130,7 @@ public class Incomes extends javax.swing.JFrame {
         getContentPane().add(ButtonClearIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 120, 47));
 
         ButtonAddIncomes.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonAddIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonAddIncomes.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonAddIncomes.setForeground(new java.awt.Color(255, 255, 255));
         ButtonAddIncomes.setText("Add");
         ButtonAddIncomes.setBorder(null);
@@ -149,6 +150,12 @@ public class Incomes extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BackIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 80, 40));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Click a row in table to edit it");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 30));
 
         UIManageIncomes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Manage Incomes - 2.png"))); // NOI18N
         getContentPane().add(UIManageIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
@@ -368,5 +375,6 @@ public class Incomes extends javax.swing.JFrame {
     private javax.swing.JTable TableIncomes;
     private javax.swing.JScrollPane TableIncomesScroll;
     private javax.swing.JLabel UIManageIncomes;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

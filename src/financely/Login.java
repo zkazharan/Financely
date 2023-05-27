@@ -47,7 +47,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(PasswordLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 302, 270, 35));
 
         ButtonLogin.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonLogin.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonLogin.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonLogin.setForeground(new java.awt.Color(255, 255, 255));
         ButtonLogin.setText("Get Started");
         ButtonLogin.setBorder(null);

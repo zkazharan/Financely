@@ -32,7 +32,7 @@ public class Landing extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ButtonLoginLanding.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonLoginLanding.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonLoginLanding.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonLoginLanding.setForeground(new java.awt.Color(255, 255, 255));
         ButtonLoginLanding.setText("Login");
         ButtonLoginLanding.setBorder(null);
@@ -44,7 +44,7 @@ public class Landing extends javax.swing.JFrame {
         getContentPane().add(ButtonLoginLanding, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 290, 47));
 
         ButtonRegisterLanding.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonRegisterLanding.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonRegisterLanding.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         ButtonRegisterLanding.setForeground(new java.awt.Color(255, 255, 255));
         ButtonRegisterLanding.setText("Register Now");
         ButtonRegisterLanding.setBorder(null);
