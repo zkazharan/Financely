@@ -1,20 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package financely;
 
 /**
  *
  * @author Kelompok 3 RPL 4A
+ * - Afwa Afini
+ * - Azka Ahmad Azharan
+ * - Hanisah Fildza Annafisah
+ * - Innaka Dylee
  */
 public class Financely {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Landing().setVisible(true);
+            }
+        });
     }
-    
 }

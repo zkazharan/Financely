@@ -1,18 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package financely;
+
+import com.mysql.jdbc.Connection;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author azkaa
+ * @author Kelompok 3 RPL 4A
+ * - Afwa Afini
+ * - Azka Ahmad Azharan
+ * - Hanisah Fildza Annafisah
+ * - Innaka Dylee
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
     public Login() {
         initComponents();
     }
@@ -40,20 +40,10 @@ public class Login extends javax.swing.JFrame {
 
         UsernameLogin.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         UsernameLogin.setBorder(null);
-        UsernameLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsernameLoginActionPerformed(evt);
-            }
-        });
         getContentPane().add(UsernameLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 207, 270, 35));
 
         PasswordLogin.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         PasswordLogin.setBorder(null);
-        PasswordLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordLoginActionPerformed(evt);
-            }
-        });
         getContentPane().add(PasswordLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 302, 270, 35));
 
         ButtonLogin.setBackground(new java.awt.Color(19, 196, 250));
@@ -76,61 +66,67 @@ public class Login extends javax.swing.JFrame {
         RegistLink.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         RegistLink.setForeground(new java.awt.Color(19, 196, 250));
         RegistLink.setText("Register");
+        RegistLink.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RegistLinkMouseClicked(evt);
+            }
+        });
         getContentPane().add(RegistLink, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, -1, -1));
 
         UILogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Login.png"))); // NOI18N
         getContentPane().add(UILogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UsernameLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UsernameLoginActionPerformed
-
-    private void PasswordLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordLoginActionPerformed
-
     private void ButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLoginActionPerformed
-        // TODO add your handling code here:
+        String username = UsernameLogin.getText();
+        String password = PasswordLogin.getText();
+        
+        if (username.equals("")){
+            JOptionPane.showMessageDialog(null, "Username not filled");
+        } else if (password.equals("")){
+            JOptionPane.showMessageDialog(null, "Password not filled");
+        } else {
+            try {
+                java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+                
+                String loginQuery = "SELECT * FROM datauser WHERE username = ? AND password = ?";
+                java.sql.PreparedStatement loginStatement = Vconn.prepareStatement(loginQuery);
+                loginStatement.setString(1, username);
+                loginStatement.setString(2, password);
+                
+                java.sql.ResultSet loginResult = loginStatement.executeQuery();
+                
+                if(loginResult.next()) {
+                    int userID = loginResult.getInt("ID");
+                    
+                    Dashboard DashboardPage = new Dashboard(userID);
+                    DashboardPage.setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username or password are wrong");               
+                }
+                
+                cleanForm();
+            } catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Login Failed", JOptionPane.OK_OPTION);
+            }
+        }
     }//GEN-LAST:event_ButtonLoginActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void RegistLinkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistLinkMouseClicked
+        Register RegisterPage = new Register();
+        RegisterPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_RegistLinkMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
+    private void cleanForm(){
+        UsernameLogin.setText("");        
+        PasswordLogin.setText("");
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonLogin;
     private javax.swing.JPasswordField PasswordLogin;

@@ -1,20 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package financely;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author azkaa
+ * @author Kelompok 3 RPL 4A
+ * - Afwa Afini
+ * - Azka Ahmad Azharan
+ * - Hanisah Fildza Annafisah
+ * - Innaka Dylee
  */
 public class Analytics extends javax.swing.JFrame {
+    
+    private int userID;
 
-    /**
-     * Creates new form Analytics
-     */
-    public Analytics() {
+    public Analytics(int userID) {
         initComponents();
+        
+        this.userID = userID;
+        
+        this.show_table_transaction_history_all();
+        this.show_table_income_per_category();
+        this.show_table_expense_per_category();
     }
 
     /**
@@ -26,55 +37,352 @@ public class Analytics extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        TableHistoryScroll = new javax.swing.JScrollPane();
+        TableHistory = new javax.swing.JTable();
+        SelectGroupHistory = new javax.swing.JComboBox<>();
+        TableIncomesCategoryScroll = new javax.swing.JScrollPane();
+        TableIncomesCategory = new javax.swing.JTable();
+        TableExpensesCategoryScroll = new javax.swing.JScrollPane();
+        TableExpensesCategory = new javax.swing.JTable();
+        BackAnalytics = new javax.swing.JLabel();
+        UIAnalytics = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Financely");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Analytics.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 660));
+        TableHistory.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Analytics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Analytics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Analytics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Analytics.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        ));
+        TableHistoryScroll.setViewportView(TableHistory);
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Analytics().setVisible(true);
+        getContentPane().add(TableHistoryScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 380, 390));
+
+        SelectGroupHistory.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        SelectGroupHistory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Day", "Month", "Year" }));
+        SelectGroupHistory.setToolTipText("");
+        SelectGroupHistory.setBorder(null);
+        SelectGroupHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectGroupHistoryActionPerformed(evt);
             }
         });
+        getContentPane().add(SelectGroupHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 140, 40));
+
+        TableIncomesCategory.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        TableIncomesCategoryScroll.setViewportView(TableIncomesCategory);
+
+        getContentPane().add(TableIncomesCategoryScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 240, 140));
+
+        TableExpensesCategory.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        TableExpensesCategoryScroll.setViewportView(TableExpensesCategory);
+
+        getContentPane().add(TableExpensesCategoryScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 207, 240, 140));
+
+        BackAnalytics.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackAnalyticsMouseClicked(evt);
+            }
+        });
+        getContentPane().add(BackAnalytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 80, 40));
+
+        UIAnalytics.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Analytics.png"))); // NOI18N
+        getContentPane().add(UIAnalytics, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 660));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void SelectGroupHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectGroupHistoryActionPerformed
+        String group = (String) SelectGroupHistory.getSelectedItem();
+        
+        if (group == "All") {
+            this.show_table_transaction_history_all();
+        } else if (group == "Day") {
+            this.show_table_transaction_history_day();
+        } else if (group == "Month") {
+            this.show_table_transaction_history_month();
+        } else if (group == "Year") {
+            this.show_table_transaction_history_year();
+        }
+    }//GEN-LAST:event_SelectGroupHistoryActionPerformed
+
+    private void BackAnalyticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackAnalyticsMouseClicked
+        Dashboard DashboardPage = new Dashboard(userID);
+        DashboardPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BackAnalyticsMouseClicked
+   
+    private void show_table_transaction_history_all() {
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        table.addColumn("No.");
+        table.addColumn("Type");
+        table.addColumn("Date");
+        table.addColumn("Notes");
+        table.addColumn("Categories");
+        table.addColumn("Amount");
+        
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            
+            String query = "SELECT * FROM TransactionHistoryAll WHERE userID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            
+            statement.setInt(1, this.userID);
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            int counter = 1;
+            
+            while (result.next()){
+                table.addRow(new Object[]{
+                    counter++, result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6)
+                });
+            }
+            
+            TableHistory.setModel(table);
+            
+            TableColumnModel columnModel = TableHistory.getColumnModel();
+            columnModel.getColumn(0).setPreferredWidth(30);
+            
+            TableHistory.getTableHeader().setResizingAllowed(false);
+            TableHistory.getTableHeader().setReorderingAllowed(false);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    private void show_table_transaction_history_day() {
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        table.addColumn("No.");
+        table.addColumn("Type");
+        table.addColumn("Date");
+        table.addColumn("Amount");
+        
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            
+            String query = "SELECT * FROM TransactionHistoryDay WHERE userID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            
+            statement.setInt(1, this.userID);
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            int counter = 1;
+            
+            while (result.next()){
+                table.addRow(new Object[]{
+                    counter++, result.getString(2), result.getString(3), result.getString(4)
+                });
+            }
+            
+            TableHistory.setModel(table);
+            TableHistory.getTableHeader().setResizingAllowed(false);
+            TableHistory.getTableHeader().setReorderingAllowed(false);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    private void show_table_transaction_history_month() {
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        table.addColumn("No.");
+        table.addColumn("Type");
+        table.addColumn("Month");
+        table.addColumn("Amount");
+        
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            
+            String query = "SELECT * FROM TransactionHistoryMonth WHERE userID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            
+            statement.setInt(1, this.userID);
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            int counter = 1;
+            
+            while (result.next()){
+                table.addRow(new Object[]{
+                    counter++, result.getString(2), result.getString(4), result.getString(5)
+                });
+            }
+            
+            TableHistory.setModel(table);
+            TableHistory.getTableHeader().setResizingAllowed(false);
+            TableHistory.getTableHeader().setReorderingAllowed(false);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    private void show_table_transaction_history_year() {
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        table.addColumn("No.");
+        table.addColumn("Type");
+        table.addColumn("Year");
+        table.addColumn("Amount");
+        
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            
+            String query = "SELECT * FROM TransactionHistoryYear WHERE userID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            
+            statement.setInt(1, this.userID);
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            int counter = 1;
+            
+            while (result.next()){
+                table.addRow(new Object[]{
+                    counter++, result.getString(2), result.getString(3), result.getString(4)
+                });
+            }
+            
+            TableHistory.setModel(table);
+            TableHistory.getTableHeader().setResizingAllowed(false);
+            TableHistory.getTableHeader().setReorderingAllowed(false);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
+    private void show_table_income_per_category() {
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        table.addColumn("No.");
+        table.addColumn("Categories");
+        table.addColumn("Amount");
+        
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            
+            String query = "SELECT * FROM IncomePerCategory WHERE userID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            
+            statement.setInt(1, this.userID);
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            int counter = 1;
+            
+            while (result.next()){
+                table.addRow(new Object[]{
+                    counter++, result.getString(2), result.getString(3)
+                });
+            }
+            
+            TableIncomesCategory.setModel(table); 
+            TableIncomesCategory.getTableHeader().setResizingAllowed(false);
+            TableIncomesCategory.getTableHeader().setReorderingAllowed(false);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    private void show_table_expense_per_category() {
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        table.addColumn("No.");
+        table.addColumn("Categories");
+        table.addColumn("Amount");
+        
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            
+            String query = "SELECT * FROM ExpensePerCategory WHERE userID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            
+            statement.setInt(1, this.userID);
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            int counter = 1;
+            
+            while (result.next()){
+                table.addRow(new Object[]{
+                    counter++, result.getString(2), result.getString(3)
+                });
+            }
+            
+            TableExpensesCategory.setModel(table); 
+            TableExpensesCategory.getTableHeader().setResizingAllowed(false);
+            TableExpensesCategory.getTableHeader().setReorderingAllowed(false);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel BackAnalytics;
+    private javax.swing.JComboBox<String> SelectGroupHistory;
+    private javax.swing.JTable TableExpensesCategory;
+    private javax.swing.JScrollPane TableExpensesCategoryScroll;
+    private javax.swing.JTable TableHistory;
+    private javax.swing.JScrollPane TableHistoryScroll;
+    private javax.swing.JTable TableIncomesCategory;
+    private javax.swing.JScrollPane TableIncomesCategoryScroll;
+    private javax.swing.JLabel UIAnalytics;
     // End of variables declaration//GEN-END:variables
 }

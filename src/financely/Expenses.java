@@ -1,20 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package financely;
+
+import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author azkaa
+ * @author Kelompok 3 RPL 4A
+ * - Afwa Afini
+ * - Azka Ahmad Azharan
+ * - Hanisah Fildza Annafisah
+ * - Innaka Dylee
  */
 public class Expenses extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Expenses
-     */
-    public Expenses() {
+    
+    private int userID;
+    private String expensesID;
+    
+    public Expenses(int userID) {
         initComponents();
+        
+        this.userID = userID;
+        
+        this.state("Unselected");
+        
+        this.showTable();
     }
 
     /**
@@ -26,176 +40,333 @@ public class Expenses extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ButtonDeleteExpense = new javax.swing.JButton();
-        AmountIncomes = new javax.swing.JTextField();
-        AmountIncomes1 = new javax.swing.JTextField();
-        ButtonDeleteExpense2 = new javax.swing.JButton();
-        ButtonDeleteExpense1 = new javax.swing.JButton();
-        ButtonAddIncomes = new javax.swing.JButton();
-        TableIncomes = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        ButtonDeleteExpenses = new javax.swing.JButton();
+        NotesExpenses = new javax.swing.JTextField();
+        AmountExpenses = new javax.swing.JTextField();
+        ButtonEditExpenses = new javax.swing.JButton();
+        ButtonClearExpenses = new javax.swing.JButton();
+        ButtonAddExpenses = new javax.swing.JButton();
+        TableExpensesScroll = new javax.swing.JScrollPane();
+        TableExpenses = new javax.swing.JTable();
+        DateExpenses = new com.toedter.calendar.JDateChooser();
+        CategoriesExpenses = new javax.swing.JComboBox<>();
+        BackExpenses = new javax.swing.JLabel();
+        UIManageExpenses = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Financely");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ButtonDeleteExpense.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonDeleteExpense.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        ButtonDeleteExpense.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonDeleteExpense.setText("Delete");
-        ButtonDeleteExpense.setBorder(null);
-        ButtonDeleteExpense.addActionListener(new java.awt.event.ActionListener() {
+        ButtonDeleteExpenses.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonDeleteExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonDeleteExpenses.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonDeleteExpenses.setText("Delete");
+        ButtonDeleteExpenses.setBorder(null);
+        ButtonDeleteExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonDeleteExpenseActionPerformed(evt);
+                ButtonDeleteExpensesActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonDeleteExpense, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, 120, 47));
+        getContentPane().add(ButtonDeleteExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, 120, 47));
 
-        AmountIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        AmountIncomes.setBorder(null);
-        AmountIncomes.addActionListener(new java.awt.event.ActionListener() {
+        NotesExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        NotesExpenses.setBorder(null);
+        getContentPane().add(NotesExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 510, 270, 35));
+
+        AmountExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        AmountExpenses.setBorder(null);
+        getContentPane().add(AmountExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 270, 35));
+
+        ButtonEditExpenses.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonEditExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonEditExpenses.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonEditExpenses.setText("Save Edit");
+        ButtonEditExpenses.setBorder(null);
+        ButtonEditExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AmountIncomesActionPerformed(evt);
+                ButtonEditExpensesActionPerformed(evt);
             }
         });
-        getContentPane().add(AmountIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 473, 270, 35));
+        getContentPane().add(ButtonEditExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 500, 120, 47));
 
-        AmountIncomes1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        AmountIncomes1.setBorder(null);
-        AmountIncomes1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonClearExpenses.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonClearExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonClearExpenses.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonClearExpenses.setText("Clear");
+        ButtonClearExpenses.setBorder(null);
+        ButtonClearExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AmountIncomes1ActionPerformed(evt);
+                ButtonClearExpensesActionPerformed(evt);
             }
         });
-        getContentPane().add(AmountIncomes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 381, 270, 35));
+        getContentPane().add(ButtonClearExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 120, 47));
 
-        ButtonDeleteExpense2.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonDeleteExpense2.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        ButtonDeleteExpense2.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonDeleteExpense2.setText("Save Edit");
-        ButtonDeleteExpense2.setBorder(null);
-        ButtonDeleteExpense2.addActionListener(new java.awt.event.ActionListener() {
+        ButtonAddExpenses.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonAddExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonAddExpenses.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonAddExpenses.setText("Add");
+        ButtonAddExpenses.setBorder(null);
+        ButtonAddExpenses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonDeleteExpense2ActionPerformed(evt);
+                ButtonAddExpensesActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonDeleteExpense2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 460, 120, 47));
+        getContentPane().add(ButtonAddExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 380, 50));
 
-        ButtonDeleteExpense1.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonDeleteExpense1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        ButtonDeleteExpense1.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonDeleteExpense1.setText("Clear");
-        ButtonDeleteExpense1.setBorder(null);
-        ButtonDeleteExpense1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonDeleteExpense1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ButtonDeleteExpense1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, 120, 47));
-
-        ButtonAddIncomes.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonAddIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        ButtonAddIncomes.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonAddIncomes.setText("Add");
-        ButtonAddIncomes.setBorder(null);
-        ButtonAddIncomes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonAddIncomesActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ButtonAddIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 380, 47));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableExpenses.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        TableIncomes.setViewportView(jTable1);
-
-        getContentPane().add(TableIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 340, 200));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Manage Incomes - 2.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void ButtonDeleteExpenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteExpenseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonDeleteExpenseActionPerformed
-
-    private void AmountIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmountIncomesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AmountIncomesActionPerformed
-
-    private void AmountIncomes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmountIncomes1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AmountIncomes1ActionPerformed
-
-    private void ButtonDeleteExpense1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteExpense1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonDeleteExpense1ActionPerformed
-
-    private void ButtonDeleteExpense2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteExpense2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonDeleteExpense2ActionPerformed
-
-    private void ButtonAddIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddIncomesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonAddIncomesActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Expenses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Expenses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Expenses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Expenses.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Expenses().setVisible(true);
+        TableExpenses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableExpensesMouseClicked(evt);
             }
         });
+        TableExpensesScroll.setViewportView(TableExpenses);
+
+        getContentPane().add(TableExpensesScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 340, 250));
+
+        DateExpenses.setDateFormatString("yyyy-MM-dd");
+        getContentPane().add(DateExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 290, 40));
+
+        CategoriesExpenses.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        CategoriesExpenses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Choose --", "Food", "Medical", "Laundry", "Shopping", "Transport", "" }));
+        CategoriesExpenses.setToolTipText("");
+        CategoriesExpenses.setBorder(null);
+        getContentPane().add(CategoriesExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 290, 40));
+
+        BackExpenses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackExpensesMouseClicked(evt);
+            }
+        });
+        getContentPane().add(BackExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 80, 40));
+
+        UIManageExpenses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Manage Expenses - 2.png"))); // NOI18N
+        getContentPane().add(UIManageExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void ButtonDeleteExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteExpensesActionPerformed
+        try {
+            java.sql.Connection Vconn = (com.mysql.jdbc.Connection)DBconnect.configDB();
+                
+            String query = "DELETE FROM dataexpenses WHERE expensesID = ?"; 
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query); 
+
+            statement.setInt(1, Integer.parseInt(this.expensesID));
+            statement.execute();
+            
+            JOptionPane.showMessageDialog(null, "Data successfully deleted");
+            this.showTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Failed to delete data");
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        this.cleanForm();
+        this.state("Unselected");
+    }//GEN-LAST:event_ButtonDeleteExpensesActionPerformed
+
+    private void ButtonClearExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonClearExpensesActionPerformed
+        TableExpenses.clearSelection();
+        
+        this.cleanForm();
+        
+        this.state("Unselected");
+    }//GEN-LAST:event_ButtonClearExpensesActionPerformed
+
+    private void ButtonEditExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditExpensesActionPerformed
+        Date date = DateExpenses.getDate();
+        String notes = NotesExpenses.getText();
+        String categories = (String) CategoriesExpenses.getSelectedItem();
+        String amount = AmountExpenses.getText();
+        
+        if (date == null){
+            JOptionPane.showMessageDialog(null, "Please set the date");
+        } else if (categories.equals("--Choose--")){
+            JOptionPane.showMessageDialog(null, "Please choose the category");
+        } else if (amount.equals("")){
+            JOptionPane.showMessageDialog(null, "Please fill the amount");
+        } else {
+            try {
+                java.sql.Connection Vconn = (com.mysql.jdbc.Connection)DBconnect.configDB();
+                
+                String query = "UPDATE dataexpenses SET Date = ?, Notes = ?, Categories = ?, Amount = ? WHERE expensesID = ?"; 
+                java.sql.PreparedStatement statement = Vconn.prepareStatement(query); 
+
+                statement.setDate(1, new java.sql.Date(date.getTime()));
+                statement.setString(2, notes);
+                statement.setString(3, categories);
+                statement.setInt(4, Integer.parseInt(amount));
+                statement.setInt(5, Integer.parseInt(this.expensesID));
+                statement.execute();
+                
+                JOptionPane.showMessageDialog(null, "Data successfully updated");
+                this.showTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Failed to update data");
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+            cleanForm();
+            this.state("Unselected");
+        }
+    }//GEN-LAST:event_ButtonEditExpensesActionPerformed
+
+    private void ButtonAddExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddExpensesActionPerformed
+        Date date = DateExpenses.getDate();
+        String notes = NotesExpenses.getText();
+        String categories = (String) CategoriesExpenses.getSelectedItem();
+        String amount = AmountExpenses.getText();
+        
+        if (date == null){
+            JOptionPane.showMessageDialog(null, "Please set the date");
+        } else if (categories.equals("--Choose--")){
+            JOptionPane.showMessageDialog(null, "Please choose the category");
+        } else if (amount.equals("")){
+            JOptionPane.showMessageDialog(null, "Please fill the amount");
+        } else {
+            try {
+                java.sql.Connection Vconn = (com.mysql.jdbc.Connection)DBconnect.configDB();
+                
+                String query = "INSERT INTO dataexpenses (userID, Date, Notes, Categories, Amount) VALUES (?, ?, ?, ?, ?)"; 
+                java.sql.PreparedStatement statement = Vconn.prepareStatement(query); 
+
+                statement.setInt(1, this.userID);
+                statement.setDate(2, new java.sql.Date(date.getTime()));
+                statement.setString(3, notes);
+                statement.setString(4, categories);
+                statement.setInt(5, Integer.parseInt(amount));
+                statement.execute();
+                
+                JOptionPane.showMessageDialog(null, "Data successfully added");
+                this.showTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Failed to add data");
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+            this.cleanForm();
+        }
+    }//GEN-LAST:event_ButtonAddExpensesActionPerformed
+
+    private void TableExpensesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableExpensesMouseClicked
+        this.state("Selected");
+        
+        int row = TableExpenses.rowAtPoint(evt.getPoint());
+        
+        String ID = (String) TableExpenses.getValueAt(row, 1);
+        Date date = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            date = dateFormat.parse((String) TableExpenses.getValueAt(row, 2));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String notes = (String) TableExpenses.getValueAt(row, 3);
+        String categories = (String) TableExpenses.getValueAt(row, 4);
+        String amount = (String) TableExpenses.getValueAt(row, 5);
+        
+        this.expensesID = ID;
+        DateExpenses.setDate(date);
+        NotesExpenses.setText(notes);
+        CategoriesExpenses.setSelectedItem(categories);
+        AmountExpenses.setText(amount);
+    }//GEN-LAST:event_TableExpensesMouseClicked
+
+    private void BackExpensesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackExpensesMouseClicked
+        Dashboard DashboardPage = new Dashboard(userID);
+        DashboardPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BackExpensesMouseClicked
+
+    private void state(String state) {
+        if (state == "Selected") {
+            ButtonAddExpenses.setVisible(false);
+            ButtonClearExpenses.setVisible(true);
+            ButtonDeleteExpenses.setVisible(true);
+            ButtonEditExpenses.setVisible(true);
+        } else if (state == "Unselected") {
+            ButtonAddExpenses.setVisible(true);
+            ButtonClearExpenses.setVisible(false);
+            ButtonDeleteExpenses.setVisible(false);
+            ButtonEditExpenses.setVisible(false); 
+        }
+    }
+    
+    private void showTable() {
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        table.addColumn("No.");
+        table.addColumn("ID");
+        table.addColumn("Date");
+        table.addColumn("Notes");
+        table.addColumn("Categories");
+        table.addColumn("Amount");
+        
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            
+            int counter = 1;            
+            
+            String query = "SELECT * FROM dataexpenses WHERE userID = ? ORDER BY Date DESC";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            statement.setInt(1, this.userID);
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            while(result.next()) {
+                table.addRow(new Object[]{
+                    counter++, result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6)
+                });
+            }
+            
+            TableExpenses.setModel(table);
+            
+            TableColumnModel columnModel = TableExpenses.getColumnModel();
+            columnModel.getColumn(0).setPreferredWidth(30);
+            columnModel.getColumn(1).setPreferredWidth(30);
+            
+            TableExpenses.getTableHeader().setResizingAllowed(false);
+            TableExpenses.getTableHeader().setReorderingAllowed(false);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Failed to get data");
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
+    private void cleanForm() {
+        this.expensesID = "";
+        DateExpenses.setDate(null);
+        NotesExpenses.setText("");
+        CategoriesExpenses.setSelectedIndex(0);
+        AmountExpenses.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField AmountIncomes;
-    private javax.swing.JTextField AmountIncomes1;
-    private javax.swing.JButton ButtonAddIncomes;
-    private javax.swing.JButton ButtonDeleteExpense;
-    private javax.swing.JButton ButtonDeleteExpense1;
-    private javax.swing.JButton ButtonDeleteExpense2;
-    private javax.swing.JScrollPane TableIncomes;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField AmountExpenses;
+    private javax.swing.JLabel BackExpenses;
+    private javax.swing.JButton ButtonAddExpenses;
+    private javax.swing.JButton ButtonClearExpenses;
+    private javax.swing.JButton ButtonDeleteExpenses;
+    private javax.swing.JButton ButtonEditExpenses;
+    private javax.swing.JComboBox<String> CategoriesExpenses;
+    private com.toedter.calendar.JDateChooser DateExpenses;
+    private javax.swing.JTextField NotesExpenses;
+    private javax.swing.JTable TableExpenses;
+    private javax.swing.JScrollPane TableExpensesScroll;
+    private javax.swing.JLabel UIManageExpenses;
     // End of variables declaration//GEN-END:variables
 }

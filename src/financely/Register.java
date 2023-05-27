@@ -1,18 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package financely;
+
+import com.mysql.jdbc.Connection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author azkaa
+ * @author Kelompok 3 RPL 4A
+ * - Afwa Afini
+ * - Azka Ahmad Azharan
+ * - Hanisah Fildza Annafisah
+ * - Innaka Dylee
  */
 public class Register extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Register
-     */
     public Register() {
         initComponents();
     }
@@ -45,33 +47,23 @@ public class Register extends javax.swing.JFrame {
         LoginLink.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         LoginLink.setForeground(new java.awt.Color(19, 196, 250));
         LoginLink.setText("Login");
+        LoginLink.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LoginLinkMouseClicked(evt);
+            }
+        });
         getContentPane().add(LoginLink, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 530, -1, -1));
 
         EmailRegister.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         EmailRegister.setBorder(null);
-        EmailRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailRegisterActionPerformed(evt);
-            }
-        });
         getContentPane().add(EmailRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 205, 270, 35));
 
         UsernameRegister.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         UsernameRegister.setBorder(null);
-        UsernameRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsernameRegisterActionPerformed(evt);
-            }
-        });
         getContentPane().add(UsernameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 299, 270, 35));
 
         PasswordRegister.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         PasswordRegister.setBorder(null);
-        PasswordRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordRegisterActionPerformed(evt);
-            }
-        });
         getContentPane().add(PasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 394, 270, 35));
 
         ButtonRegister.setBackground(new java.awt.Color(19, 196, 250));
@@ -95,57 +87,83 @@ public class Register extends javax.swing.JFrame {
         getContentPane().add(UIRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 660));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void EmailRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmailRegisterActionPerformed
-
-    private void UsernameRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UsernameRegisterActionPerformed
-
-    private void PasswordRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordRegisterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordRegisterActionPerformed
-
     private void ButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRegisterActionPerformed
-        // TODO add your handling code here:
+        String email = EmailRegister.getText();
+        String username = UsernameRegister.getText();
+        String password = PasswordRegister.getText();
+        
+        if (email.equals("")){
+            JOptionPane.showMessageDialog(null, "Email not filled");
+        } else if (username.equals("")){
+            JOptionPane.showMessageDialog(null, "Username not filled");
+        } else if (password.equals("")){
+            JOptionPane.showMessageDialog(null, "Password not filled");
+        } else if (!validateEmail(email)){
+            JOptionPane.showMessageDialog(null, "The email must end in @gmail.com");
+        } else {
+            try {
+                java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+                
+                String emailCheckQuery = "SELECT * FROM datauser WHERE email = ?";
+                java.sql.PreparedStatement emailCheckStatement = Vconn.prepareStatement(emailCheckQuery);
+                emailCheckStatement.setString(1, email);
+                
+                java.sql.ResultSet emailCheckResult = emailCheckStatement.executeQuery();
+                
+                if (emailCheckResult.next()){
+                    JOptionPane.showMessageDialog(null, "Email already registered, please use another email.", "Create Account Failed", JOptionPane.OK_OPTION);
+                } else {
+                    String usernameCheckQuery = "SELECT * FROM datauser WHERE username = ?";
+                    java.sql.PreparedStatement usernameCheckStatement = Vconn.prepareStatement(usernameCheckQuery);
+                    usernameCheckStatement.setString(1, username);
+
+                    java.sql.ResultSet usernameCheckResult = usernameCheckStatement.executeQuery();
+
+                    if (usernameCheckResult.next()){
+                        JOptionPane.showMessageDialog(null, "Username already registered, please choose another username.", "Create Account Failed", JOptionPane.OK_OPTION);
+                    } else {
+                        String registrationQuery = "INSERT INTO datauser (email, username, password) VALUES (?, ?, ?)";                   
+                        java.sql.PreparedStatement registrationStatement = Vconn.prepareStatement(registrationQuery);
+                        registrationStatement.setString(1, email);
+                        registrationStatement.setString(2, username);
+                        registrationStatement.setString(3, password);
+                        registrationStatement.execute();
+
+                        Login LoginPage = new Login();
+                        LoginPage.setVisible(true);
+                        this.setVisible(false);
+
+                        JOptionPane.showMessageDialog(null, "Please log in to continue.", "Create Account Successfully", JOptionPane.PLAIN_MESSAGE);
+                    }
+                }                            
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Create Account Failed", JOptionPane.OK_OPTION);
+            }
+            cleanForm();            
+        }
     }//GEN-LAST:event_ButtonRegisterActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void LoginLinkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginLinkMouseClicked
+        Login LoginPage = new Login();
+        LoginPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_LoginLinkMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Register().setVisible(true);
-            }
-        });
+    public static boolean validateEmail(String email){
+        String regex = "^\\S+@gmail.com$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        
+        return matcher.matches();
+    }
+    
+    private void cleanForm(){
+        EmailRegister.setText("");
+        UsernameRegister.setText("");
+        PasswordRegister.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

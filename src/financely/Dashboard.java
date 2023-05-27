@@ -1,20 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package financely;
+
+import com.mysql.jdbc.Connection;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author azkaa
+ * @author Kelompok 3 RPL 4A
+ * - Afwa Afini
+ * - Azka Ahmad Azharan
+ * - Hanisah Fildza Annafisah
+ * - Innaka Dylee
  */
 public class Dashboard extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Dashboard
-     */
-    public Dashboard() {
+    
+    private int userID;
+    
+    public Dashboard(int userID) {
         initComponents();
+        
+        this.userID = userID;
+        
+        WelcomeText.setText(WelcomeText.getText() + this.getUsername());
+        
+        TotalIncomesValue.setText(this.getTotalIncomes());
+        TotalExpensesValue.setText(this.getTotalExpenses());
+        BalancesValue.setText(this.getBalances());
     }
 
     /**
@@ -26,111 +36,214 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        Logout = new javax.swing.JLabel();
+        AnalyticsMenuTitle = new javax.swing.JLabel();
+        ManageExpensesMenuTitle = new javax.swing.JLabel();
+        ManageIncomesMenuTitle = new javax.swing.JLabel();
+        TotalExpensesValue = new javax.swing.JLabel();
+        BalancesValue = new javax.swing.JLabel();
+        WelcomeText = new javax.swing.JLabel();
+        TotalIncomesValue = new javax.swing.JLabel();
+        UIDashboard = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Financely");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Inter", 1, 15)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Logout");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Inter", 1, 15)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Analytics");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Inter", 1, 15)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Manage Expense");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 205, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Inter", 1, 15)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Manage Incomes");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 157, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("xxx");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 356, 310, 60));
-
-        jLabel7.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("xxx");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 514, 310, 60));
-
-        jLabel8.setFont(new java.awt.Font("Inter", 1, 20)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Welcome to Financely, ");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 310, 60));
-
-        jLabel9.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("xxx");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 310, 60));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Dashboard - 2.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 660));
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dashboard().setVisible(true);
+        Logout.setFont(new java.awt.Font("Inter", 1, 15)); // NOI18N
+        Logout.setForeground(new java.awt.Color(255, 255, 255));
+        Logout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logout.setText("Logout");
+        Logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogoutMouseClicked(evt);
             }
         });
-    }
+        getContentPane().add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 70, 30));
 
+        AnalyticsMenuTitle.setFont(new java.awt.Font("Inter", 1, 15)); // NOI18N
+        AnalyticsMenuTitle.setForeground(new java.awt.Color(255, 255, 255));
+        AnalyticsMenuTitle.setText("            Analytics");
+        AnalyticsMenuTitle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AnalyticsMenuTitleMouseClicked(evt);
+            }
+        });
+        getContentPane().add(AnalyticsMenuTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 190, 30));
+
+        ManageExpensesMenuTitle.setFont(new java.awt.Font("Inter", 1, 15)); // NOI18N
+        ManageExpensesMenuTitle.setForeground(new java.awt.Color(255, 255, 255));
+        ManageExpensesMenuTitle.setText("            Manage Expenses");
+        ManageExpensesMenuTitle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageExpensesMenuTitleMouseClicked(evt);
+            }
+        });
+        getContentPane().add(ManageExpensesMenuTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 195, 190, 40));
+
+        ManageIncomesMenuTitle.setFont(new java.awt.Font("Inter", 1, 15)); // NOI18N
+        ManageIncomesMenuTitle.setForeground(new java.awt.Color(255, 255, 255));
+        ManageIncomesMenuTitle.setText("            Manage Incomes");
+        ManageIncomesMenuTitle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageIncomesMenuTitleMouseClicked(evt);
+            }
+        });
+        getContentPane().add(ManageIncomesMenuTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 147, 200, 40));
+
+        TotalExpensesValue.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        TotalExpensesValue.setForeground(new java.awt.Color(255, 255, 255));
+        TotalExpensesValue.setText("-");
+        getContentPane().add(TotalExpensesValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 356, 310, 60));
+
+        BalancesValue.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        BalancesValue.setForeground(new java.awt.Color(255, 255, 255));
+        BalancesValue.setText("-");
+        getContentPane().add(BalancesValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 514, 310, 60));
+
+        WelcomeText.setFont(new java.awt.Font("Inter", 1, 20)); // NOI18N
+        WelcomeText.setForeground(new java.awt.Color(255, 255, 255));
+        WelcomeText.setText("Welcome to Financely, ");
+        getContentPane().add(WelcomeText, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 470, 60));
+
+        TotalIncomesValue.setFont(new java.awt.Font("Inter", 0, 20)); // NOI18N
+        TotalIncomesValue.setForeground(new java.awt.Color(255, 255, 255));
+        TotalIncomesValue.setText("-");
+        getContentPane().add(TotalIncomesValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 310, 60));
+
+        UIDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Dashboard - 2.png"))); // NOI18N
+        getContentPane().add(UIDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 660));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
+        Login LoginPage = new Login();
+        LoginPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_LogoutMouseClicked
+
+    private void ManageIncomesMenuTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManageIncomesMenuTitleMouseClicked
+        Incomes IncomesPage = new Incomes(this.userID);
+        IncomesPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ManageIncomesMenuTitleMouseClicked
+
+    private void ManageExpensesMenuTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManageExpensesMenuTitleMouseClicked
+        Expenses ExpensesPage = new Expenses(this.userID);
+        ExpensesPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ManageExpensesMenuTitleMouseClicked
+
+    private void AnalyticsMenuTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnalyticsMenuTitleMouseClicked
+        Analytics AnalyticsPage = new Analytics(this.userID);
+        AnalyticsPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_AnalyticsMenuTitleMouseClicked
+
+    private String getTotalIncomes() {
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+                
+            String query = "SELECT * FROM TotalIncomes WHERE userID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            statement.setInt(1, this.userID);
+            
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            if(result.next()) {
+                String totalIncomes = result.getString("Total Incomes");
+
+                return (totalIncomes);
+            }
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Login Failed", JOptionPane.OK_OPTION);
+        }
+        
+        return "Rp. 0";
+    }
+    
+    private String getTotalExpenses() {
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+                
+            String query = "SELECT * FROM TotalExpenses WHERE userID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            statement.setInt(1, this.userID);
+            
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            if(result.next()) {
+                String totalExpenses = result.getString("Total Expenses");
+
+                return (totalExpenses);
+            }
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Login Failed", JOptionPane.OK_OPTION);
+        }
+        
+        return "Rp. 0";
+    }
+    
+    private String getBalances() {
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+                
+            String query = "SELECT * FROM Balances WHERE userID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            statement.setInt(1, this.userID);
+            
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            if(result.next()) {
+                String balances = result.getString("Balances");
+
+                return (balances);
+            }
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Login Failed", JOptionPane.OK_OPTION);
+        }
+        
+        return "Rp. 0";
+    }
+    
+    public String getUsername() {
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+                
+            String query = "SELECT username FROM datauser WHERE ID = ?";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            statement.setInt(1, this.userID);
+            
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            if(result.next()) {
+                String username = result.getString("username");
+
+                return (username);
+            }
+            
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Login Failed", JOptionPane.OK_OPTION);
+        }
+        
+        return "";
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel AnalyticsMenuTitle;
+    private javax.swing.JLabel BalancesValue;
+    private javax.swing.JLabel Logout;
+    private javax.swing.JLabel ManageExpensesMenuTitle;
+    private javax.swing.JLabel ManageIncomesMenuTitle;
+    private javax.swing.JLabel TotalExpensesValue;
+    private javax.swing.JLabel TotalIncomesValue;
+    private javax.swing.JLabel UIDashboard;
+    private javax.swing.JLabel WelcomeText;
     // End of variables declaration//GEN-END:variables
 }

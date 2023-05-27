@@ -1,20 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package financely;
+
+import java.sql.Connection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author asus
+ * @author Kelompok 3 RPL 4A
+ * - Afwa Afini
+ * - Azka Ahmad Azharan
+ * - Hanisah Fildza Annafisah
+ * - Innaka Dylee
  */
 public class Incomes extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Incomes
-     */
-    public Incomes() {
+    
+    private int userID;
+    private String incomesID;
+    
+    public Incomes(int userID) {
         initComponents();
+        
+        this.userID = userID;
+        
+        this.state("Unselected");
+        
+        this.showTable();
     }
 
     /**
@@ -27,14 +41,16 @@ public class Incomes extends javax.swing.JFrame {
     private void initComponents() {
 
         CategoriesIncomes = new javax.swing.JComboBox<>();
-        TableIncomes = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableIncomesScroll = new javax.swing.JScrollPane();
+        TableIncomes = new javax.swing.JTable();
         ButtonEditIncomes = new javax.swing.JButton();
         NotesIncomes = new javax.swing.JTextField();
         AmountIncomes = new javax.swing.JTextField();
-        ButtonAddIncomes = new javax.swing.JButton();
-        ButtonClearIncomes = new javax.swing.JButton();
         ButtonDeleteIncomes = new javax.swing.JButton();
+        ButtonClearIncomes = new javax.swing.JButton();
+        ButtonAddIncomes = new javax.swing.JButton();
+        DateIncomes = new com.toedter.calendar.JDateChooser();
+        BackIncomes = new javax.swing.JLabel();
         UIManageIncomes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,25 +59,30 @@ public class Incomes extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         CategoriesIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        CategoriesIncomes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose", "Item 2", "Item 3", "Item 4" }));
+        CategoriesIncomes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Choose--", "Salary", "Profit", "Return" }));
         CategoriesIncomes.setToolTipText("");
         CategoriesIncomes.setBorder(null);
-        getContentPane().add(CategoriesIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 285, 290, 40));
+        getContentPane().add(CategoriesIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 290, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableIncomes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        TableIncomes.setViewportView(jTable1);
+        TableIncomes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableIncomesMouseClicked(evt);
+            }
+        });
+        TableIncomesScroll.setViewportView(TableIncomes);
 
-        getContentPane().add(TableIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 340, 200));
+        getContentPane().add(TableIncomesScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 200, 340, 250));
 
         ButtonEditIncomes.setBackground(new java.awt.Color(19, 196, 250));
         ButtonEditIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -73,25 +94,39 @@ public class Incomes extends javax.swing.JFrame {
                 ButtonEditIncomesActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonEditIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, 120, 47));
+        getContentPane().add(ButtonEditIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 500, 120, 47));
 
         NotesIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         NotesIncomes.setBorder(null);
-        NotesIncomes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NotesIncomesActionPerformed(evt);
-            }
-        });
-        getContentPane().add(NotesIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 474, 270, 35));
+        getContentPane().add(NotesIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 510, 270, 35));
 
         AmountIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         AmountIncomes.setBorder(null);
-        AmountIncomes.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(AmountIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 270, 35));
+
+        ButtonDeleteIncomes.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonDeleteIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonDeleteIncomes.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonDeleteIncomes.setText("Delete");
+        ButtonDeleteIncomes.setBorder(null);
+        ButtonDeleteIncomes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AmountIncomesActionPerformed(evt);
+                ButtonDeleteIncomesActionPerformed(evt);
             }
         });
-        getContentPane().add(AmountIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 381, 270, 35));
+        getContentPane().add(ButtonDeleteIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, 120, 47));
+
+        ButtonClearIncomes.setBackground(new java.awt.Color(19, 196, 250));
+        ButtonClearIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        ButtonClearIncomes.setForeground(new java.awt.Color(255, 255, 255));
+        ButtonClearIncomes.setText("Clear");
+        ButtonClearIncomes.setBorder(null);
+        ButtonClearIncomes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonClearIncomesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ButtonClearIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 120, 47));
 
         ButtonAddIncomes.setBackground(new java.awt.Color(19, 196, 250));
         ButtonAddIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -103,107 +138,235 @@ public class Incomes extends javax.swing.JFrame {
                 ButtonAddIncomesActionPerformed(evt);
             }
         });
-        getContentPane().add(ButtonAddIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, 380, 47));
+        getContentPane().add(ButtonAddIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 380, 47));
 
-        ButtonClearIncomes.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonClearIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        ButtonClearIncomes.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonClearIncomes.setText("Delete");
-        ButtonClearIncomes.setBorder(null);
-        ButtonClearIncomes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonClearIncomesActionPerformed(evt);
+        DateIncomes.setDateFormatString("yyyy-MM-dd");
+        getContentPane().add(DateIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 290, 40));
+
+        BackIncomes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackIncomesMouseClicked(evt);
             }
         });
-        getContentPane().add(ButtonClearIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 120, 47));
-
-        ButtonDeleteIncomes.setBackground(new java.awt.Color(19, 196, 250));
-        ButtonDeleteIncomes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        ButtonDeleteIncomes.setForeground(new java.awt.Color(255, 255, 255));
-        ButtonDeleteIncomes.setText("Clear");
-        ButtonDeleteIncomes.setBorder(null);
-        ButtonDeleteIncomes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonDeleteIncomesActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ButtonDeleteIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, 120, 47));
+        getContentPane().add(BackIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 80, 40));
 
         UIManageIncomes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Manage Incomes - 2.png"))); // NOI18N
         getContentPane().add(UIManageIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AmountIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmountIncomesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AmountIncomesActionPerformed
-
-    private void NotesIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NotesIncomesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NotesIncomesActionPerformed
-
     private void ButtonEditIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditIncomesActionPerformed
-        // TODO add your handling code here:
+        Date date = DateIncomes.getDate();
+        String notes = NotesIncomes.getText();
+        String categories = (String) CategoriesIncomes.getSelectedItem();
+        String amount = AmountIncomes.getText();
+        
+        if (date == null){
+            JOptionPane.showMessageDialog(null, "Please set the date");
+        } else if (categories.equals("--Choose--")){
+            JOptionPane.showMessageDialog(null, "Please choose the category");
+        } else if (amount.equals("")){
+            JOptionPane.showMessageDialog(null, "Please fill the amount");
+        } else {
+            try {
+                java.sql.Connection Vconn = (com.mysql.jdbc.Connection)DBconnect.configDB();
+                
+                String query = "UPDATE dataincomes SET Date = ?, Notes = ?, Categories = ?, Amount = ? WHERE IDIncomes = ?"; 
+                java.sql.PreparedStatement statement = Vconn.prepareStatement(query); 
+
+                statement.setDate(1, new java.sql.Date(date.getTime()));
+                statement.setString(2, notes);
+                statement.setString(3, categories);
+                statement.setInt(4, Integer.parseInt(amount));
+                statement.setInt(5, Integer.parseInt(this.incomesID));
+                statement.execute();
+                
+                JOptionPane.showMessageDialog(null, "Data successfully updated");
+                this.showTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Failed to update data");
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+            cleanForm();
+            this.state("Unselected");
+        }
     }//GEN-LAST:event_ButtonEditIncomesActionPerformed
 
     private void ButtonAddIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddIncomesActionPerformed
-        // TODO add your handling code here:
+        Date date = DateIncomes.getDate();
+        String notes = NotesIncomes.getText();
+        String categories = (String) CategoriesIncomes.getSelectedItem();
+        String amount = AmountIncomes.getText();
+        
+        if (date == null){
+            JOptionPane.showMessageDialog(null, "Please set the date");
+        } else if (categories.equals("--Choose--")){
+            JOptionPane.showMessageDialog(null, "Please choose the category");
+        } else if (amount.equals("")){
+            JOptionPane.showMessageDialog(null, "Please fill the amount");
+        } else {
+            try {
+                java.sql.Connection Vconn = (com.mysql.jdbc.Connection)DBconnect.configDB();
+                
+                String query = "INSERT INTO dataincomes (userID, Date, Notes, Categories, Amount) VALUES (?, ?, ?, ?, ?)"; 
+                java.sql.PreparedStatement statement = Vconn.prepareStatement(query); 
+
+                statement.setInt(1, this.userID);
+                statement.setDate(2, new java.sql.Date(date.getTime()));
+                statement.setString(3, notes);
+                statement.setString(4, categories);
+                statement.setInt(5, Integer.parseInt(amount));
+                statement.execute();
+                
+                JOptionPane.showMessageDialog(null, "Data successfully added");
+                this.showTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Failed to add data");
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+            this.cleanForm();
+        }
     }//GEN-LAST:event_ButtonAddIncomesActionPerformed
 
-    private void ButtonClearIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonClearIncomesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonClearIncomesActionPerformed
-
     private void ButtonDeleteIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteIncomesActionPerformed
-        // TODO add your handling code here:
+        try {
+            java.sql.Connection Vconn = (com.mysql.jdbc.Connection)DBconnect.configDB();
+                
+            String query = "DELETE FROM dataincomes WHERE IDincomes = ?"; 
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query); 
+
+            statement.setInt(1, Integer.parseInt(this.incomesID));
+            statement.execute();
+            
+            JOptionPane.showMessageDialog(null, "Data successfully deleted");
+            this.showTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Failed to delete data");
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        this.cleanForm();
+        this.state("Unselected");
     }//GEN-LAST:event_ButtonDeleteIncomesActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void ButtonClearIncomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonClearIncomesActionPerformed
+        TableIncomes.clearSelection();
+        
+        this.cleanForm();
+        
+        this.state("Unselected");
+    }//GEN-LAST:event_ButtonClearIncomesActionPerformed
+
+    private void TableIncomesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableIncomesMouseClicked
+        this.state("Selected");
+        
+        int row = TableIncomes.rowAtPoint(evt.getPoint());
+        
+        String ID = (String) TableIncomes.getValueAt(row, 1);
+        Date date = null;
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Incomes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Incomes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Incomes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Incomes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            date = dateFormat.parse((String) TableIncomes.getValueAt(row, 2));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        //</editor-fold>
+        String notes = (String) TableIncomes.getValueAt(row, 3);
+        String categories = (String) TableIncomes.getValueAt(row, 4);
+        String amount = (String) TableIncomes.getValueAt(row, 5);
+        
+        this.incomesID = ID;
+        DateIncomes.setDate(date);
+        NotesIncomes.setText(notes);
+        CategoriesIncomes.setSelectedItem(categories);
+        AmountIncomes.setText(amount);
+    }//GEN-LAST:event_TableIncomesMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Incomes().setVisible(true);
-            }
-        });
+    private void BackIncomesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackIncomesMouseClicked
+        Dashboard DashboardPage = new Dashboard(userID);
+        DashboardPage.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BackIncomesMouseClicked
+
+    private void state(String state) {
+        if (state == "Selected") {
+            ButtonAddIncomes.setVisible(false);
+            ButtonClearIncomes.setVisible(true);
+            ButtonDeleteIncomes.setVisible(true);
+            ButtonEditIncomes.setVisible(true);
+        } else if (state == "Unselected") {
+            ButtonAddIncomes.setVisible(true);
+            ButtonClearIncomes.setVisible(false);
+            ButtonDeleteIncomes.setVisible(false);
+            ButtonEditIncomes.setVisible(false); 
+        }
     }
-
+    
+    private void showTable() {
+        DefaultTableModel table = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        table.addColumn("No.");
+        table.addColumn("ID");
+        table.addColumn("Date");
+        table.addColumn("Notes");
+        table.addColumn("Categories");
+        table.addColumn("Amount");
+        
+        try {
+            java.sql.Connection Vconn = (Connection)DBconnect.configDB();
+            
+            int counter = 1;            
+            
+            String query = "SELECT * FROM dataincomes WHERE userID = ? ORDER BY Date DESC";
+            java.sql.PreparedStatement statement = Vconn.prepareStatement(query);
+            statement.setInt(1, this.userID);
+            java.sql.ResultSet result = statement.executeQuery();
+            
+            while(result.next()) {
+                table.addRow(new Object[]{
+                    counter++, result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6)
+                });
+            }
+            
+            TableIncomes.setModel(table);
+            
+            TableColumnModel columnModel = TableIncomes.getColumnModel();
+            columnModel.getColumn(0).setPreferredWidth(30);
+            columnModel.getColumn(1).setPreferredWidth(30);
+            
+            TableIncomes.getTableHeader().setResizingAllowed(false);
+            TableIncomes.getTableHeader().setReorderingAllowed(false);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Failed to get data");
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+    
+    private void cleanForm() {
+        this.incomesID = "";
+        DateIncomes.setDate(null);
+        NotesIncomes.setText("");
+        CategoriesIncomes.setSelectedIndex(0);
+        AmountIncomes.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AmountIncomes;
+    private javax.swing.JLabel BackIncomes;
     private javax.swing.JButton ButtonAddIncomes;
     private javax.swing.JButton ButtonClearIncomes;
     private javax.swing.JButton ButtonDeleteIncomes;
     private javax.swing.JButton ButtonEditIncomes;
     private javax.swing.JComboBox<String> CategoriesIncomes;
+    private com.toedter.calendar.JDateChooser DateIncomes;
     private javax.swing.JTextField NotesIncomes;
-    private javax.swing.JScrollPane TableIncomes;
+    private javax.swing.JTable TableIncomes;
+    private javax.swing.JScrollPane TableIncomesScroll;
     private javax.swing.JLabel UIManageIncomes;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
