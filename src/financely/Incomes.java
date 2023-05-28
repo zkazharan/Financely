@@ -52,7 +52,6 @@ public class Incomes extends javax.swing.JFrame {
         ButtonAddIncomes = new javax.swing.JButton();
         DateIncomes = new com.toedter.calendar.JDateChooser();
         BackIncomes = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         UIManageIncomes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,6 +65,7 @@ public class Incomes extends javax.swing.JFrame {
         CategoriesIncomes.setBorder(null);
         getContentPane().add(CategoriesIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 290, 40));
 
+        TableIncomes.setToolTipText("Click a row in table to edit it");
         TableIncomes.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         TableIncomes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -152,12 +152,6 @@ public class Incomes extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BackIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 80, 40));
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Click a row in table to edit it");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 30));
 
         UIManageIncomes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Manage Incomes - 2.png"))); // NOI18N
         getContentPane().add(UIManageIncomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
@@ -377,6 +371,5 @@ public class Incomes extends javax.swing.JFrame {
     private javax.swing.JTable TableIncomes;
     private javax.swing.JScrollPane TableIncomesScroll;
     private javax.swing.JLabel UIManageIncomes;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

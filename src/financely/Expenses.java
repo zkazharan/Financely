@@ -52,7 +52,6 @@ public class Expenses extends javax.swing.JFrame {
         DateExpenses = new com.toedter.calendar.JDateChooser();
         CategoriesExpenses = new javax.swing.JComboBox<>();
         BackExpenses = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         UIManageExpenses = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -116,6 +115,7 @@ public class Expenses extends javax.swing.JFrame {
         });
         getContentPane().add(ButtonAddExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 380, 50));
 
+        TableExpenses.setToolTipText("Click a row in table to edit it");
         TableExpenses.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -151,12 +151,6 @@ public class Expenses extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BackExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 80, 40));
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Click a row in table to edit it");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 190, 30));
 
         UIManageExpenses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UIComponent/Manage Expenses - 2.png"))); // NOI18N
         getContentPane().add(UIManageExpenses, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
@@ -376,6 +370,5 @@ public class Expenses extends javax.swing.JFrame {
     private javax.swing.JTable TableExpenses;
     private javax.swing.JScrollPane TableExpensesScroll;
     private javax.swing.JLabel UIManageExpenses;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

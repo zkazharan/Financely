@@ -166,9 +166,8 @@ public class Analytics extends javax.swing.JFrame {
     }
     
     private void show_data_expenses(){
-        
         try {
-            String pieQuery = "SELECT Categories, SUM(Amount) AS TotalAmount FROM dataexpenses WHERE userID = ? GROUP BY Categories";
+            String pieQuery = "SELECT Categories, SUM(Amount) AS TotalAmount FROM dataexpenses WHERE userID = ? GROUP BY Categories, userID";
             java.sql.Connection Vconn = (Connection)DBconnect.configDB();
             java.sql.PreparedStatement s = Vconn.prepareStatement(pieQuery);
             s.setInt(1, userID);
@@ -181,13 +180,13 @@ public class Analytics extends javax.swing.JFrame {
                 pieChart1.addData(new ModelPieChart(categories, values, getColor(index++)));
             }
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
     
     private void show_data_incomes(){
-        
         try {
-            String pieIncomes = "SELECT Categories, SUM(Amount) AS TotalAmount FROM dataincomes WHERE userID = ? GROUP BY Categories";
+            String pieIncomes = "SELECT Categories, SUM(Amount) AS TotalAmount FROM dataincomes WHERE userID = ? GROUP BY Categories, userID";
             java.sql.Connection Vconn = (Connection)DBconnect.configDB();
             java.sql.PreparedStatement s = Vconn.prepareStatement(pieIncomes);
             s.setInt(1, userID);
@@ -200,6 +199,7 @@ public class Analytics extends javax.swing.JFrame {
                 pieChart2.addData(new ModelPieChart(categories, values, getColor(index++)));
             }
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
     

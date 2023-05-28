@@ -45,7 +45,7 @@ CREATE TABLE `dataexpenses` (
   PRIMARY KEY (`expensesID`),
   KEY `dataexpenses_ibfk_1` (`userID`),
   CONSTRAINT `dataexpenses_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `datauser` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,7 +54,7 @@ CREATE TABLE `dataexpenses` (
 
 LOCK TABLES `dataexpenses` WRITE;
 /*!40000 ALTER TABLE `dataexpenses` DISABLE KEYS */;
-INSERT INTO `dataexpenses` VALUES (1,1,'2023-05-10','','Food',10000),(4,2,'2023-05-10','','Food',10000),(3,3,'2023-05-24','','Medical',25000),(1,5,'2023-05-18','','Laundry',30000),(1,25,'2023-05-17','','Transport',80000),(1,27,'2023-05-05','123','Food',123),(1,28,'2023-05-06','','Medical',123),(1,29,'2023-06-01','nitessss','Medical',2223),(1,30,'2023-05-05','321','Medical',321),(5,31,'2023-05-04','test','Food',500000),(1,34,'2023-05-05','123','Food',123321);
+INSERT INTO `dataexpenses` VALUES (1,1,'2023-05-10','','Food',10000),(4,2,'2023-05-10','','Food',10000),(3,3,'2023-05-24','','Medical',25000),(1,5,'2023-05-18','','Laundry',30000),(1,25,'2023-05-17','','Transport',80000),(1,27,'2023-05-05','123','Food',123),(1,28,'2023-05-06','','Medical',123),(1,29,'2023-06-01','nitessss','Medical',2223),(1,30,'2023-05-05','321','Medical',321),(5,31,'2023-05-04','test','Food',500000),(1,34,'2023-05-05','123','Food',123321),(2,46,'2023-05-01','123','Medical',50000),(2,47,'2023-05-04','123','Medical',30000),(2,48,'2023-05-03','','Food',20000);
 /*!40000 ALTER TABLE `dataexpenses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +338,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `transactionhistoryall` AS select `dataincomes`.`userID` AS `userID`,'Income' AS `Type`,`dataincomes`.`Date` AS `Date`,`dataincomes`.`Notes` AS `Notes`,`dataincomes`.`Categories` AS `Categories`,`dataincomes`.`Amount` AS `Amount` from `dataincomes` union select `dataexpenses`.`userID` AS `userID`,'Expense' AS `TYPE`,`dataexpenses`.`Date` AS `Date`,`dataexpenses`.`Notes` AS `Notes`,`dataexpenses`.`Categories` AS `Categories`,`dataexpenses`.`Amount` AS `Amount` from `dataexpenses` order by `userID`,`Date` desc */;
+/*!50001 VIEW `transactionhistoryall` AS select `dataincomes`.`userID` AS `userID`,'Income' AS `Type`,`dataincomes`.`Date` AS `Date`,`dataincomes`.`Notes` AS `Notes`,`dataincomes`.`Categories` AS `Categories`,`dataincomes`.`Amount` AS `Amount` from `dataincomes` union select `dataexpenses`.`userID` AS `userID`,'Expense' AS `TYPE`,`dataexpenses`.`Date` AS `Date`,`dataexpenses`.`Notes` AS `Notes`,`dataexpenses`.`Categories` AS `Categories`,concat('-',`dataexpenses`.`Amount`) AS `Amount` from `dataexpenses` order by `userID`,`Date` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -374,7 +374,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `transactionhistorymonth` AS select `dataincomes`.`userID` AS `userID`,'Income' AS `Type`,`dataincomes`.`Date` AS `Date`,concat(monthname(`dataincomes`.`Date`),', ',year(`dataincomes`.`Date`)) AS `Month`,sum(`dataincomes`.`Amount`) AS `Amount` from `dataincomes` group by `dataincomes`.`userID`,concat(monthname(`dataincomes`.`Date`),', ',year(`dataincomes`.`Date`)) union select `dataexpenses`.`userID` AS `userID`,'Expenses' AS `Type`,`dataexpenses`.`Date` AS `Date`,concat(monthname(`dataexpenses`.`Date`),', ',year(`dataexpenses`.`Date`)) AS `MONTH`,concat('-',sum(`dataexpenses`.`Amount`)) AS `Amount` from `dataexpenses` group by `dataexpenses`.`userID`,concat(monthname(`dataexpenses`.`Date`),', ',year(`dataexpenses`.`Date`)) order by `userID`,year(`Date`) desc,month(`Date`) desc,`Type` desc */;
+/*!50001 VIEW `transactionhistorymonth` AS select `dataincomes`.`userID` AS `userID`,'Income' AS `Type`,`dataincomes`.`Date` AS `Date`,concat(monthname(`dataincomes`.`Date`),', ',year(`dataincomes`.`Date`)) AS `Month`,sum(`dataincomes`.`Amount`) AS `Amount` from `dataincomes` group by `dataincomes`.`userID`,concat(monthname(`dataincomes`.`Date`),', ',year(`dataincomes`.`Date`)) union select `dataexpenses`.`userID` AS `userID`,'Expense' AS `Type`,`dataexpenses`.`Date` AS `Date`,concat(monthname(`dataexpenses`.`Date`),', ',year(`dataexpenses`.`Date`)) AS `MONTH`,concat('-',sum(`dataexpenses`.`Amount`)) AS `Amount` from `dataexpenses` group by `dataexpenses`.`userID`,concat(monthname(`dataexpenses`.`Date`),', ',year(`dataexpenses`.`Date`)) order by `userID`,year(`Date`) desc,month(`Date`) desc,`Type` desc */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -406,4 +406,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-27 15:58:58
+-- Dump completed on 2023-05-28 23:55:02

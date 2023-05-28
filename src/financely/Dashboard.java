@@ -120,9 +120,13 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutMouseClicked
-        Login LoginPage = new Login();
-        LoginPage.setVisible(true);
-        this.setVisible(false);
+        int LogoutConfirmation = JOptionPane.showConfirmDialog(null, "Do you want to Logout ? ", "Confirmation",JOptionPane.YES_NO_OPTION);
+        
+        if (LogoutConfirmation == JOptionPane.YES_OPTION){
+            Login LoginPage = new Login();
+            LoginPage.setVisible(true);
+            this.setVisible(false);
+        } else {}
     }//GEN-LAST:event_LogoutMouseClicked
 
     private void ManageIncomesMenuTitleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManageIncomesMenuTitleMouseClicked
